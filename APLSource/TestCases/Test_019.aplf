@@ -1,0 +1,36 @@
+ R←Test_019(stopFlag batchFlag);⎕TRAP;dmx;F;exe;rc;iss;ind;offset
+⍝ Exercise `RunInno` with a made-up application.
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ :If batchFlag
+     R←T._NoBatchTest
+ :Else
+
+     ⍝ Required to check whether the version number is updated from 1.0.0 to 1.1.0:
+     #.⎕SHADOW'inno' ⋄ 'inno'#.⎕NS''
+     #.inno.⎕FX'r←Version' 'r←''inno'' ''1.1.0'' ''2020-11-29'''
+
+     ⎕←'*** This test needs you!'
+     ⎕←'When asked whether you want to install a programm just keep pressing <enter> until it is'
+     0 0⍴⍞,0/⍞←'Press <enter> to continue'
+     F←FilesAndDirs
+     Assert 0=1⊃F.RmDir'MoreTests/Installed'
+     1 ⎕NDELETE ##.CiderConfig.HOME,'/MoreTests/inno.iss'
+     (##.CiderConfig.HOME,'/MoreTests/inno.iss')⎕NCOPY ##.CiderConfig.HOME,'/MoreTests/inno-orig.iss'
+     iss←⊃F.NGET'MoreTests/inno.iss' 1
+     iss←'<<TEMPDIR>>'⎕R(739⌶0)⊣iss
+     (⊂iss)F.NPUT'MoreTests/inno.iss' 1
+     exe←(##.CiderConfig.HOME,'/MoreTests/')##.Inno.Run'inno'
+     rc←##.Execute.Process exe
+     →T.GoToTidyUp 0=F.IsFile'Installed\foo\unins000.exe'
+     iss←⊃F.NGET'MoreTests/inno.iss' 1
+     ind←1+⊃'#define MyAppVersion "[0-9.]+"'⎕S 2⊣iss
+     →T.GoToTidyUp'1.1.0'≢{'"'~⍨⍵/⍨{⍵∨≠\⍵}⍵∊'"'}ind⊃iss
+     R←T._OK
+ :EndIf
+
+∆TidyUp:
+ Assert 1=F.DeleteFile'MoreTests/inno.iss'
+ {}##.Execute.Process ##.CiderConfig.HOME,'\Installed\foo\unins000.exe /VERYSILENT /SUPPRESSMSGBOXES'
+⍝Done

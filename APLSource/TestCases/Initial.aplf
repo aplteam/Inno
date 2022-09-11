@@ -1,0 +1,4 @@
+ Initial
+ {}FilesAndDirs.Cd ##.CiderConfig.HOME
+ '>>> Current dir changed to: ',FilesAndDirs.Cd''
+⍝Done

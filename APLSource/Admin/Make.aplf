@@ -1,0 +1,6 @@
+ {r}←Make flag
+ r←⍬
+ :If flag
+     ⎕SE.MakeHelpers.CreateAPI ##.Inno 'Run'
+     ⎕SE.MakeHelpers.CreateTatinPackageFromNamespace ##.Inno
+ :EndIf

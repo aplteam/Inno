@@ -1,0 +1,26 @@
+ R←Test_011(stopFlag batchFlag);⎕TRAP;F;filename;folder;rc;buff
+⍝ Exercise `UpdateVersionNumberInInno_ISS`
+ ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
+ R←T._Failed
+
+ F←FilesAndDirs
+
+ #.⎕SHADOW'inno'
+ 'inno'#.⎕NS''
+ #.inno.⎕FX'r←Version' 'r←''inno'' ''2.0.0'' ''yyy-mm-dd'''
+
+ folder←'expand'F.NormalizePath F.GetTempPath,'\Test_011\'
+ 'Create!'F.CheckPath folder
+ filename←folder,'inno.iss'
+ filename ⎕NCOPY ##.CiderConfig.HOME,'\MoreTests\inno-orig.iss'
+ Assert F.IsFile filename
+
+ folder ##.Inno.UpdateVersionNumberInInno_ISS'inno'
+ buff←1⊃F.NGET filename
+ →T.GoToTidyUp 1≠+/'2.0.0'⍷buff
+
+ R←T._OK
+
+∆TidyUp:
+ :Trap 0 ⋄ F.RmDir folder ⋄ :EndTrap
+⍝Done
