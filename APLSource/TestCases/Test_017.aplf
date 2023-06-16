@@ -1,5 +1,5 @@
  R←Test_017(stopFlag batchFlag);⎕TRAP;dmx
-⍝ Exercise `RunInno`. The script is supposed to fail.
+⍝ Exercise `Run`. The script is supposed to fail.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
 
  R←T._Failed

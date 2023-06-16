@@ -1,5 +1,5 @@
- R←Test_019(stopFlag batchFlag);⎕TRAP;dmx;F;exe;rc;iss;ind;offset
-⍝ Exercise `RunInno` with a made-up application.
+ R←Test_019(stopFlag batchFlag);⎕TRAP;dmx;F;exe;rc;iss;ind;offset;msg
+⍝ Exercise `Run` with a made-up application.
  ⎕TRAP←(999 'C' '. ⍝ Deliberate error')(0 'N')
  R←T._Failed
 
@@ -11,9 +11,9 @@
      #.⎕SHADOW'inno' ⋄ 'inno'#.⎕NS''
      #.inno.⎕FX'r←Version' 'r←''inno'' ''1.1.0'' ''2020-11-29'''
 
-     ⎕←'*** This test needs you!'
-     ⎕←'When asked whether you want to install a programm just keep pressing <enter> until it is'
-     0 0⍴⍞,0/⍞←'Press <enter> to continue'
+     msg←⊂'This test needs you!'
+     msg,←⊂'When asked whether you want to install a programm just keep pressing <enter> until it is'
+     CommTools.Pause msg
      F←FilesAndDirs
      Assert 0=1⊃F.RmDir'MoreTests/Installed'
      1 ⎕NDELETE ##.CiderConfig.HOME,'/MoreTests/inno.iss'
