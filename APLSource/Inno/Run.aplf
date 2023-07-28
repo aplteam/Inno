@@ -11,8 +11,8 @@
 ⍝ Normally after 3-5 times it works but sometimes it takes longer, so we try a max of 10 times before giving up.\\
  F←FilesAndDirs
  counter←flag←0
- path←{0<⎕NC ⍵:⍎⍵ ⋄ F.PWD}'path'
- issFilename←'expand'F.NormalizePath path,'\',name,'.iss'
+ path←F.AddTrailingSep{0<⎕NC ⍵:⍎⍵ ⋄ F.PWD}'path'
+ issFilename←'expand'F.NormalizePath path,name,'.iss'
  UpdateVersionName issFilename name
  :If 0=≢inno←SelectInno ⍬
      :Return
@@ -38,7 +38,7 @@
  :Until success∨10=counter
  'Attempted 10 times to create the installer EXE, always failed!'Assert 10>counter
  exeName←⊃¯1↑msg
- targetDir←iss GetDefFromInno'TargetDir'
+ targetDir←path,iss GetDefFromInno'TargetDir'
  '"TargetDir" needs to be defined in the Inno script'Assert 0<≢targetDir
  :If ≢/{1⊃⎕NPARTS ⍵}¨('expand'F.NormalizePath targetDir)('expand'F.NormalizePath exeName)
      ⍝ In case Inno's working directory and the target directory are not the same:
