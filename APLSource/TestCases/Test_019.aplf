@@ -12,7 +12,7 @@
      #.inno.⎕FX'r←Version' 'r←''inno'' ''1.1.0'' ''2020-11-29'''
 
      msg←⊂'This test needs you!'
-     msg,←⊂'When asked whether you want to install a programm just keep pressing <enter> until it is'
+     msg,←⊂'When asked whether you want to install a programm just keep pressing <enter> until it is done'
      CommTools.Pause msg
      F←FilesAndDirs
      Assert 0=1⊃F.RmDir'MoreTests/Installed'

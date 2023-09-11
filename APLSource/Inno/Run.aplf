@@ -38,7 +38,11 @@
  :Until success∨10=counter
  'Attempted 10 times to create the installer EXE, always failed!'Assert 10>counter
  exeName←⊃¯1↑msg
- targetDir←path,iss GetDefFromInno'TargetDir'
+ targetDir←iss GetDefFromInno'TargetDir'
+ :If '/'≠1⍴targetDir
+ :AndIf ~':'∊targetDir
+     targetDir←path,targetDir
+ :EndIf
  '"TargetDir" needs to be defined in the Inno script'Assert 0<≢targetDir
  :If ≢/{1⊃⎕NPARTS ⍵}¨('expand'F.NormalizePath targetDir)('expand'F.NormalizePath exeName)
      ⍝ In case Inno's working directory and the target directory are not the same:

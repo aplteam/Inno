@@ -19,5 +19,5 @@
   source: "APLSource/Inno",
   tags: "inno,setup,installer",
   userCommandScript: "",
-  version: "1.0.1+32",
+  version: "1.0.2+35",
 }
