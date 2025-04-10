@@ -15,7 +15,7 @@
  issFilename←'expand'F.NormalizePath path,name,'.iss'
  UpdateVersionName issFilename name
  :If 0=≢inno←SelectInno ⍬
-     :Return
+     setupFilename←'' ⋄ ⎕←'Cancelled by user' ⋄ →0
  :EndIf
  cmd←'"',inno,'" ',issFilename,'"'
  iss←1⊃F.NGET issFilename 1
