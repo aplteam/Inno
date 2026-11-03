@@ -1,4 +1,6 @@
 (
+ '* 2.1.0 from 2026-11-03'
+ '  * Packages updated, particularly WinSys'
  '* 2.0.0 from 2025-04-10'
  '  * Potentially breaking: `Version` now returns a char vector stemming from the package config file'
  '  * Packages updated'
