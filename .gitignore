@@ -3,6 +3,7 @@ CONTINUE.dws
 conga.crash
 /Dist/
 /packages/*
+/TestResults/
 !/packages/apl-dependencies.txt
 !/packages/apl-buildlist.json
 /packages_dev/*

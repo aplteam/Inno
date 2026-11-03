@@ -1,6 +1,7 @@
 {
   api: "API",
   assets: "",
+  checkLICENSEfile: 1,
   description: "Run the Inno Setup compiler on a particular script in order to create a setup.exe",
   documentation: "",
   files: "",
@@ -19,5 +20,5 @@
   source: "APLSource/Inno",
   tags: "inno,setup,installer",
   userCommandScript: "",
-  version: "2.0.0+36",
+  version: "2.1.0+38",
 }
